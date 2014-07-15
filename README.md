@@ -30,6 +30,7 @@ function certcompare { vimdiff <(viewcert $1) <(viewcert $2); }
 ```
 
 ## CA Directory disection
+Where not specified, just use the viewcert bash function to view a certificate. Anything else is not going to be a certificat and will need a different command.
 ```bash
 tree  $(puppet config print ssldir)
 /etc/puppetlabs/puppet/ssl
@@ -73,3 +74,26 @@ tree  $(puppet config print ssldir)
     ├── pe-internal-peadmin-mcollective-client.pem
     └── pe-internal-puppet-console-mcollective-client.pem
 ```
+
+```bash
+ca/ca_crl.pem
+```
+Certificate revocation list, to view this file run:
+```bash
+openssl crl -in ca/ca_crl.pem -noout -text
+```
+
+```bash
+ca/ca_crt.pem
+```
+The CA certificate
+
+```bash
+ca/ca_key.pem
+```
+The CA private key. For the sake of completeness the command to view it is:
+```bash
+openssl rsa -in ca/ca_key.pem -noout -text
+```
+
+
