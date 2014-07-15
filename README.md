@@ -1,6 +1,10 @@
 # Puppet Certificate Management
 An attempt at explaining certificate usage in Puppet and how to use an external CA like Thawte, Verisign, etc.
 
+## RTFM list
+[X.509](http://en.wikipedia.org/wiki/X.509)
+
+
 ## PuppetDB
 /opt/puppet/sbin/puppetdb-ssl-setup
 
@@ -10,7 +14,7 @@ An attempt at explaining certificate usage in Puppet and how to use an external 
 A list of all certificates ever issued by Puppet’s CA can be found in the file $cadir/inventory.txt.
 
 
-## List of certificates:
+## List of internall generated certificates:
 * master.puppetlabs.vm
 * pe-internal-broker
 * pe-internal-dashboard
@@ -19,7 +23,53 @@ A list of all certificates ever issued by Puppet’s CA can be found in the file
 * pe-internal-puppet-console-mcollective-client
 
 ## Usefull commands
-Run this command in bash to create a shortcut to view certificates with.
+Run these commands in bash to create a shortcut to view certificates with.
 ```bash
 function viewcert { openssl x509 -in $1 -noout -text; }
+function certcompare { vimdiff <(viewcert $1) <(viewcert $2); }
+```
+
+## CA Directory disection
+```bash
+tree  $(puppet config print ssldir)
+/etc/puppetlabs/puppet/ssl
+├── ca
+│   ├── ca_crl.pem
+│   ├── ca_crt.pem
+│   ├── ca_key.pem
+│   ├── ca_pub.pem
+│   ├── inventory.txt
+│   ├── private
+│   │   └── ca.pass
+│   ├── requests
+│   ├── serial
+│   └── signed
+│       ├── master.puppetlabs.vm.pem
+│       ├── pe-internal-broker.pem
+│       ├── pe-internal-dashboard.pem
+│       ├── pe-internal-mcollective-servers.pem
+│       ├── pe-internal-peadmin-mcollective-client.pem
+│       └── pe-internal-puppet-console-mcollective-client.pem
+├── certificate_requests
+├── certs
+│   ├── ca.pem
+│   ├── master.puppetlabs.vm.pem
+│   ├── pe-internal-broker.pem
+│   ├── pe-internal-mcollective-servers.pem
+│   ├── pe-internal-peadmin-mcollective-client.pem
+│   └── pe-internal-puppet-console-mcollective-client.pem
+├── crl.pem
+├── private
+├── private_keys
+│   ├── master.puppetlabs.vm.pem
+│   ├── pe-internal-broker.pem
+│   ├── pe-internal-mcollective-servers.pem
+│   ├── pe-internal-peadmin-mcollective-client.pem
+│   └── pe-internal-puppet-console-mcollective-client.pem
+└── public_keys
+    ├── master.puppetlabs.vm.pem
+    ├── pe-internal-broker.pem
+    ├── pe-internal-mcollective-servers.pem
+    ├── pe-internal-peadmin-mcollective-client.pem
+    └── pe-internal-puppet-console-mcollective-client.pem
 ```
