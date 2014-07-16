@@ -99,7 +99,6 @@ vimdiff <(openssl rsa -in ca/ca_key.pem -pubout) <(cat ca/ca_pub.pem )
 ```
 
 - *ca/inventory.txt*
-```
 This file contains a list of all certificates ever granted. The fields are:
   - Number,
   - Issue date,
