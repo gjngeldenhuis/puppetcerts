@@ -4,6 +4,16 @@ An attempt at explaining certificate usage in Puppet and how to use an external 
 ## RTFM list
 [X.509](http://en.wikipedia.org/wiki/X.509)
 
+## Autosign
+/etc/puppetlabs/puppet/autosign.conf
+mynode01.example.com
+\*.example.com
+\*.local
+
+## REST API
+To get the master public cert:
+curl -k -H "Accept: s" https://master.puppetlabs.vm:8140/production/certificate/ca
+
 
 ## PuppetDB
 /opt/puppet/sbin/puppetdb-ssl-setup
@@ -133,7 +143,10 @@ Is a copy of *ca/ca_crl.pem*
 It's private, go away. Not sure at present. It remained empty during node requests, so possibly related to *certificate_requests* directory.
 
 - *private_keys*
+This directory contains the private keys for all puppet internal certificates.
 
+- *public_keys*
+This directory contains the public keys for all interal certificates
 
 
 TODO
@@ -141,3 +154,21 @@ TODO
 * Use the above script to generate large amount of csr requests
 * How to use puppet cert in wireshark to view traffic
 * Revoke a certificate to see what changes and capture that in the directory listing
+* Completely flesh out file listing and explain each certificate
+* List various puppet ssl configuration settings, where and how to get and set them.
+* puppet ca list --all   gives an error when run on the master. Why? It should be working out the box?
+* There is both a certificate and cert puppet face. Why? And what is the difference?
+
+files to investigate
+/opt/puppet/lib/ruby/site_ruby/1.9.1/puppet/face/certificate.rb
+/opt/puppet/lib/ruby/1.9.1/rubygems/commands/cert_command.rb
+/opt/puppet/lib/ruby/site_ruby/1.9.1/puppet/application/cert.rb
+/opt/puppet/share/console/applications/certificates
+/opt/puppet/share/console-auth/config/certificate_authorization.example.yml
+
+Man Pages to read ( they are displayed when doing puppet help )
+/opt/puppet/share/man/man8
+puppet-cert
+puppet-certificate
+puppet-certificate_request
+puppet-certificate_revocation_list
