@@ -81,22 +81,16 @@ First Header | Second Header
 Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
 
-- ```bash
-ca/ca_crl.pem
-```
+- *ca/ca_crl.pem*
 Certificate revocation list, to view this file run:
 ```bash
 openssl crl -in ca/ca_crl.pem -noout -text
 ```
 
-- ```bash
-ca/ca_crt.pem
-```
+- *ca/ca_crt.pem*
 The CA certificate
 
-```bash
-ca/ca_key.pem
-```
+- *ca/ca_key.pem*
 The CA private key. For the sake of completeness the command to view it is:
 ```bash
 openssl rsa -in ca/ca_key.pem -noout -text
