@@ -3,6 +3,8 @@ An attempt at explaining certificate usage in Puppet and how to use an external 
 
 ## RTFM list
 [X.509](http://en.wikipedia.org/wiki/X.509)
+[Puppet Rest API](http://docs.puppetlabs.com/guides/rest_auth_conf.html)
+[openldap cert stuff, usefull](http://www.openldap.org/faq/data/cache/185.html)
 
 ## Autosign
 /etc/puppetlabs/puppet/autosign.conf
@@ -22,6 +24,26 @@ curl -k -H "Accept: s" https://master.puppetlabs.vm:8140/production/certificate/
 
 ## General
 A list of all certificates ever issued by Puppet’s CA can be found in the file $cadir/inventory.txt.
+
+## Puppet Faces 
+* cert
+  * clean
+  * fingerprint
+  * generate
+  * list
+  * print
+  * revoke
+  * sign
+  * verify
+  * reinventory
+* certificate
+* certificate\_request
+* certificate\_revocation\_list
+
+
+## Potential bugs
+* The --allowd-dns-altnames is not the puppet help cert documentation
+* The puppet cert face documentation is based of a man page but the other other cert related pages looks different.
 
 
 ## List of internall generated certificates:
@@ -158,6 +180,9 @@ TODO
 * List various puppet ssl configuration settings, where and how to get and set them.
 * puppet ca list --all   gives an error when run on the master. Why? It should be working out the box?
 * There is both a certificate and cert puppet face. Why? And what is the difference?
+* Research and explain options found in openssl-exts.cnf file which sets the settings for the puppet ca
+can be found at */opt/puppet/share/vendor/ruby/1.9.1/gems/httparty-0.11.0/spec/fixtures/ssl/openssl-exts.cnf*
+* Read about perfect forwarding security and how it is applicable to us?
 
 files to investigate
 /opt/puppet/lib/ruby/site_ruby/1.9.1/puppet/face/certificate.rb
