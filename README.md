@@ -37,6 +37,14 @@ A list of all certificates ever issued by Puppet’s CA can be found in the file
   * verify
   * reinventory
 * certificate
+  * destroy
+  * find
+  * generate
+  * info
+  * list
+  * save
+  * search
+  * sign
 * certificate\_request
 * certificate\_revocation\_list
 
@@ -44,7 +52,9 @@ A list of all certificates ever issued by Puppet’s CA can be found in the file
 ## Potential bugs
 * The --allowd-dns-altnames is not the puppet help cert documentation
 * The puppet cert face documentation is based of a man page but the other other cert related pages looks different.
-
+* Puppet cert verify does not actually say anything if it verified.
+* The cert generate command can take multiple arguments, perhaps make it more clear in the documenation.
+* The list of actions for puppet certificate --ca-location is missing.
 
 ## List of internall generated certificates:
 * master.puppetlabs.vm
@@ -183,6 +193,7 @@ TODO
 * Research and explain options found in openssl-exts.cnf file which sets the settings for the puppet ca
 can be found at */opt/puppet/share/vendor/ruby/1.9.1/gems/httparty-0.11.0/spec/fixtures/ssl/openssl-exts.cnf*
 * Read about perfect forwarding security and how it is applicable to us?
+* How do you split out multiple masters? What is the certificate setup. What is the aliases. Where is the whitelists etc.
 
 files to investigate
 /opt/puppet/lib/ruby/site_ruby/1.9.1/puppet/face/certificate.rb
